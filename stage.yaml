@@ -5,7 +5,7 @@ metadata:
   namespace: cbdmock
 spec:
   selector:
-    k8scomplex-service: stage
+    cbdmock-service: stage
   externalIPs: []
   externalTrafficPolicy: Cluster
   loadBalancerSourceRanges: []
@@ -22,17 +22,18 @@ kind: ReplicaSet
 metadata:
   name: stage
   labels:
-    k8scomplex-cluster: stage
+    cbdmock-cluster: stage
   namespace: cbdmock
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8scomplex-cluster: stage
+      cbdmock-cluster: stage
   template:
     metadata:
       labels:
-        k8scomplex-cluster: stage
+        cbdmock-cluster: stage
+        cbdmock-service: stage
     spec:
       containers:
       - image: gcr.io/stevenkim-cbd-mock/cbdmock
