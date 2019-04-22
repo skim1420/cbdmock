@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stage
+  namespace: cbdmock
+spec:
+  selector:
+    k8scomplex-service: stage
+  externalIPs: []
+  externalTrafficPolicy: Cluster
+  loadBalancerSourceRanges: []
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  sessionAffinity: None
+  type: LoadBalancer
+
+--
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: stage
+  labels:
+    k8scomplex-cluster: stage
+  namespace: cbdmock
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8scomplex-cluster: stage
+  template:
+    metadata:
+      labels:
+        k8scomplex-cluster: stage
+    spec:
+      containers:
+      - image: gcr.io/stevenkim-cbd-mock/cbdmock
+        name: cbdmock-stage
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 100m
+

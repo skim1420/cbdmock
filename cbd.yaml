@@ -1,0 +1,15 @@
+name: cbdmock
+GCSBucketName: cbd-gcs-bucket-1jqb021ww9jqwb8p0s62-1555703930
+pipelines:
+- name: Stagenate
+  pipelineType: simple
+  managedClusters:
+  - clusterName: spinnaker-k8s
+    location: us-central1-f
+    projectID: spinnaker-1022
+  defaultDeploymentImage: gcr.io/stevenkim-cbd-mock/cbdmock:release
+  kubernetesNamespace: cbdmock
+  deploymentManifest: stage.yaml
+  includePreDeployManualJudgment: true
+  includeValidation: false
+
