@@ -7,7 +7,7 @@ pipelines:
   - clusterName: spinnaker-k8s
     location: us-central1-f
     projectID: spinnaker-1022
-  defaultDeploymentImage: gcr.io/stevenkim-cbd-mock/cbdmock:release
+  defaultDeploymentImage: gcr.io/stevenkim-cbd-mock/cbdmock
   kubernetesNamespace: cbdmock
   deploymentManifest: stage.yaml
   includePreDeployManualJudgment: true
